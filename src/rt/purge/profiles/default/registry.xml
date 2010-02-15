@@ -1,0 +1,6 @@
+<registry>
+
+    <!-- Purge settings -->
+    <records interface="rt.purge.interfaces.ICachePurgingSettings" />
+    
+</registry>

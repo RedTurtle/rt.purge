@@ -1,0 +1,144 @@
+backend default {
+    .host = "localhost";
+    .port = "8080";
+}
+
+acl purge {
+    "localhost";
+}
+
+sub vcl_recv {
+    set req.grace = 120s;
+    set req.backend = default;
+
+    if (req.request == "GET" && req.url ~ "\.(gif|jpg|swf|css|js|png|jpg|jpeg|gif|png|tiff|tif|svg|swf|ico|css|js|vsd|doc|ppt|pps|xls|pdf|mp3|mp4|m4a|ogg|mov|avi|wmv|sxw|zip|gz|bz2|tgz|tar|rar|odc|odb|odf|odg|odi|odp|ods|odt|sxc|sxd|sxi|sxw|dmg|torrent|deb|msi|iso|rpm)$") {
+       lookup;
+    }
+
+    if (req.request == "PURGE") {
+        if (!client.ip ~ purge) {
+            error 405 "Not allowed.";
+        }
+        lookup;
+    }
+
+    if (req.request != "GET" &&
+        req.request != "HEAD" &&
+        req.request != "PUT" &&
+        req.request != "POST" &&
+        req.request != "TRACE" &&
+        req.request != "OPTIONS" &&
+        req.request != "DELETE") {
+        /* Non-RFC2616 or CONNECT which is weird. */
+        pipe;
+    }
+
+    if (req.request != "GET" && req.request != "HEAD") {
+        /* We only deal with GET and HEAD by default */
+        pass;
+    }
+
+    if (req.http.Authenticate || req.http.Authorization) {
+            pass;
+    }
+
+    if (req.request == "POST") {
+            pass;
+    }
+
+    # no cache for @@captcha
+    if (req.url  ~ "/@@captcha/") { pass; }
+    if (req.url  ~ "/mail_password") { pass; }
+    if (req.url  ~ "/login_form") { pass; }
+    if (req.http.Cookie && req.http.Cookie ~ "statusmessages=") { pass; }
+
+    # We only care about the "__ac.*" cookies, used for authentication
+    if (req.http.Cookie && req.http.Cookie ~ "__ac(|_(name|password|persistent))=") {
+            pass;
+    }
+
+    # force lookup even when cookies are present
+    if (req.request == "GET" && req.http.cookie) {
+            lookup;
+    }
+
+    lookup;
+}
+
+sub vcl_pipe {
+    # This is not necessary if you do not do any request rewriting.
+    set req.http.connection = "close";
+}
+
+
+sub vcl_hit {
+    if (req.request == "PURGE") {
+        purge_url(req.url);
+        error 200 "Purged";
+    }
+
+    set obj.http.X-Varnish-Action = "HIT (deliver - from cache)";
+}
+
+
+sub vcl_miss {
+    if (req.request == "PURGE") {
+        error 404 "Not in cache";
+    }
+}
+
+sub vcl_fetch {
+    set obj.grace = 600s;
+
+    if (obj.status == 404) {
+        set obj.ttl = 60s;
+
+    } else if (obj.status >= 500) { 
+        set obj.ttl = 0s; 
+
+    } else if (obj.status == 302) {
+        set obj.ttl = 60s;
+    
+    } else if (obj.status == 301) {    
+        set obj.ttl = 60s;
+                                
+    } else if (obj.http.Content-Type ~ "^image/") {
+        set obj.http.X-Varnish-Action = "FETCH (plone images)";
+        set obj.http.Expires = "Thu, 15 Apr 2110 20:00:00 GMT";
+        set obj.ttl = 5d;
+        
+    } else if (obj.http.Content-Type ~ "^text/css") {
+        
+        set obj.http.X-Varnish-Action = "FETCH (css)";
+        set obj.ttl = 20d;
+        
+    } else if (obj.http.Content-Type ~ "^application/x-javascript") {
+        set obj.http.X-Varnish-Action = "FETCH (js)";
+        set obj.ttl = 20d;
+
+    } else if (obj.http.Content-Type ~ "^text/html") {
+        
+        set obj.http.X-Varnish-Action = "FETCH (html)";
+        set obj.ttl = 1h;
+        deliver;
+
+    } else if (obj.ttl < 60s) {
+        set obj.http.X-Varnish-Action = "FETCH (the rest)";
+        set obj.ttl = 60s;
+    }
+    
+    
+}
+
+sub vcl_hash {
+    set req.hash += req.url;
+    set req.hash += req.http.host;
+
+    if (req.http.Accept-Encoding ~ "gzip") {
+        set req.hash += "gzip";
+    }
+    else if (req.http.Accept-Encoding ~ "deflate") {
+        set req.hash += "deflate";
+    }
+}
+

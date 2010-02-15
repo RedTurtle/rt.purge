@@ -1,0 +1,43 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"    
+    i18n_domain="plone.cachepurging">
+    
+    <include package="zope.annotation" />
+    <include package="plone.registry" />
+    
+    <!-- Default rewriter and purge urls -->
+    <adapter factory=".rewrite.DefaultRewriter" />
+    <!-- Purge queue -->
+    <utility factory=".purger.DefaultPurger" />
+    <adapter factory=".paths.TraversablePurgePaths" name="default" />
+
+    <!-- Make sure we can annotate the request -->
+    <class class="ZPublisher.BaseRequest.BaseRequest">
+        <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+    </class>
+    
+    <!-- Views to explicitly purge the context -->
+    <permission
+        id="plone.cachepurging.InitiatePurge"
+        title="plone.cachepurging: Manually purge objects"
+        />
+    
+    <browser:view
+        for="*"
+        name="plone.cachepurging.purge"
+        class=".browser.PurgeImmediately"
+        permission="plone.cachepurging.InitiatePurge"
+        />
+
+      <genericsetup:registerProfile
+        name="default"
+        title="purging"
+        directory="profiles/default"
+        description="Installs purging"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+                                                      />
+
+
+</configure>
