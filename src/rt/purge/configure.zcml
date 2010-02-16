@@ -26,14 +26,14 @@
     
     <browser:view
         for="*"
-        name="plone.cachepurging.purge"
+        name="rt.purge"
         class=".browser.PurgeImmediately"
         permission="plone.cachepurging.InitiatePurge"
         />
 
       <genericsetup:registerProfile
         name="default"
-        title="purging"
+        title="rt.purge"
         directory="profiles/default"
         description="Installs purging"
         provides="Products.GenericSetup.interfaces.EXTENSION"

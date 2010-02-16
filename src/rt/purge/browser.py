@@ -28,7 +28,14 @@ class PurgeImmediately(object):
         for path in getPathsToPurge(self.context, self.request):
             for url in getURLsToPurge(path, settings.cachingProxies):
                 status, xcache, xerror = purger.purgeSync(url)
-                print >>out, "Purged", url, "Status", status, "X-Cache", xcache, "Error:", xerror
-                print "Purged", url, "Status", status, "X-Cache", xcache, "Error:", xerror
+                #print >>out, "Purged", url, "Status", status, "X-Cache", xcache, "Error:", xerror
+                #print "Purged", url, "Status", status, "X-Cache", xcache, "Error:", xerror
+       
+        if status != 200: #error
+            self.context.plone_utils.addPortalMessage("Error purging context.", 'error')
+        else: 
+            self.context.plone_utils.addPortalMessage("Context purged.", 'info')
+
+        self.request.response.redirect(self.context.absolute_url())
+        return ''
         
-        return out.getvalue()
