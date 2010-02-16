@@ -16,11 +16,12 @@ sub vcl_recv {
     }
 
     if (req.request == "PURGE") {
-        if (!client.ip ~ purge) {
-            error 405 "Not allowed.";
-        }
-        lookup;
-    }
+      if (!client.ip ~ purge) {
+        error 405 "Not allowed.";
+      }
+      purge("req.url ~ " req.url);
+      error 200 "Purged";
+                                                                                        }
 
     if (req.request != "GET" &&
         req.request != "HEAD" &&
@@ -72,11 +73,6 @@ sub vcl_pipe {
 
 
 sub vcl_hit {
-    if (req.request == "PURGE") {
-        purge_url(req.url);
-        error 200 "Purged";
-    }
-
     set obj.http.X-Varnish-Action = "HIT (deliver - from cache)";
 }
 
