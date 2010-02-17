@@ -31,7 +31,7 @@ setup(name='rt.purge',
           'zope.annotation',
           'zope.lifecycleevent',
           'zope.i18nmessageid',
-          'plone.registry',
+          'plone.app.registry',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
