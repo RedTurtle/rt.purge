@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<action-icons>
+ <action-icon category="object_buttons" action_id="purge"
+              title="Purge" priority="0"
+              icon_expr="confirm_icon.gif"/>
+</action-icons>
