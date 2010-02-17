@@ -16,9 +16,7 @@ import socket
 import httplib
 import urlparse
 import logging
-import time
 import threading
-import Queue
 
 from zope.interface import implements
 from rt.purge.interfaces import IPurger
@@ -73,24 +71,6 @@ class DefaultPurger(object):
     
     # Public API
     
-    def purgeAsync(self, url, httpVerb='PURGE'):
-        (scheme, host, path, params, query, fragment) = urlparse.urlparse(url)
-        __traceback_info__ = (url, httpVerb, scheme, host,
-                              path, params, query, fragment)
-
-        q, w = self.getQueueAndWorker(url)
-        try:
-            q.put((url, httpVerb), block=False)
-            logger.debug('Queued %s' % url)
-        except Queue.Full:
-            # Make a loud noise.  Ideally the queue size would be
-            # user-configurable - but the more likely case is that the purge
-            # host is down.
-            logger.warning("The purge queue for the URL %s is full - the "
-                           "request will be discarded.  Please check the "
-                           "server is reachable, or disable this purge host",
-                           url)
-    
     def purgeSync(self, url, httpVerb='PURGE'):
         try:
             conn = self.getConnection(url)
@@ -114,25 +94,6 @@ class DefaultPurger(object):
         logger.debug("Completed synchronous purge of %s", url)
         return status, xcache, xerror
     
-    def stopThreads(self, wait=False):
-        for w in self.workers.itervalues():
-            w.stopping = True
-        # in case the queue is empty, wake it up so the .stopping flag is seen
-        for q in self.queues.values():
-            try:
-                q.put(None, block=False)
-            except Queue.Full:
-                # no problem - self.stopping should be seen.
-                pass
-        ok = True
-        if wait:
-            for w in self.workers.itervalues():
-                w.join(5)
-                if w.isAlive():
-                    logger.warning("Worker thread %s failed to terminate", w)
-                    ok = False
-        return ok
-    
     # Internal API between Purger and worker threads
     
     def getConnection(self, url):
@@ -148,27 +109,6 @@ class DefaultPurger(object):
         conn.connect()
         logger.debug("established connection to %s", host)
         return conn
-
-    def getQueueAndWorker(self, url):
-        """Create or retrieve a queue and a worker thread instance for the
-        given URL.
-        """
-        
-        (scheme, host, path, params, query, fragment) = urlparse.urlparse(url)
-        key = (host, scheme)
-        if key not in self.queues:
-            self.queueLock.acquire()
-            try:
-                if key not in self.queues:
-                    logger.debug("Creating worker thread for %s://%s",
-                                 scheme, host)
-                    assert key not in self.workers
-                    self.queues[key] = queue = Queue.Queue(self.backlog)
-                    self.workers[key] = worker = Worker(queue, host, scheme, self)
-                    worker.start()
-            finally:
-                self.queueLock.release()
-        return self.queues[key], self.workers[key]
 
     def _purgeSync(self, conn, url, httpVerb):
         """Perform the purge request. Returns a triple
@@ -210,106 +150,3 @@ class DefaultPurger(object):
         resp.read()
         logger.debug("%s of %s: %s %s", httpVerb, url, resp.status, resp.reason)
         return resp, xcache, xerror
-
-class Worker(threading.Thread):
-    """Worker thread for purging.
-    """
-
-    def __init__(self, queue, host, scheme, producer):
-        self.host = host
-        self.scheme = scheme
-        self.producer = producer
-        self.queue = queue
-        self.stopping = False
-        super(Worker, self).__init__(name="PurgeThread for %s://%s" % (scheme, host))
-
-    def run(self):
-        logger.debug("%s starting", self)
-        # Queue should always exist!
-        q = self.producer.queues[(self.host, self.scheme)]
-        connection = None
-        try:
-            while not self.stopping:
-                item = q.get()
-                if self.stopping or item is None: # Shut down thread signal
-                    logger.debug('Stopping worker thread for '
-                                 '(%s, %s).' % (self.host, self.scheme))
-                    break
-                url, httpVerb = item
-
-                # Loop handling errors (other than connection errors) doing
-                # the actual purge.
-                for i in range(5):
-                    if self.stopping:
-                        break
-                    # Get a connection.
-                    if connection is None:
-                        connection = self.getConnection(url)
-                        if connection is None: # stopping
-                            break
-                    # Got an item, purge it!
-                    try:
-                        resp, msg, err = self.producer._purgeSync(connection,
-                                                                 url, httpVerb)
-                        # worked! See if we can leave the connection open for
-                        # the next item we need to process
-                        # NOTE: If we make a HTTP 1.0 request to IIS, it
-                        # returns a HTTP 1.1 request and closes the
-                        # connection.  It is not clear if IIS is evil for
-                        # not returning a "connection: close" header in this
-                        # case (ie, assuming HTTP 1.0 close semantics), or
-                        # if httplib.py is evil for not detecting this
-                        # situation and flagging will_close.
-                        if not self.http_1_1 or resp.will_close:
-                            connection.close()
-                            connection = None
-                        break # all done with this item!
-
-                    except (httplib.HTTPException, socket.error), e:
-                        # All errors 'connection' related errors are treated
-                        # the same - simply drop the connection and retry.
-                        # the process for establishing the connection handles
-                        # other bad things that go wrong.
-                        logger.debug('Transient failure on %s for %s, '
-                                     're-establishing connection and '
-                                     'retrying: %s' % (httpVerb, url, e))
-                        connection.close()
-                        connection = None
-                    except:
-                        # All other exceptions are evil - we just disard the
-                        # item.  This prevents other logic failures etc being
-                        # retried.
-                        connection.close()
-                        connection = None
-                        logger.exception('Failed to purge %s', url)
-                        break
-        except:
-            logger.exception('Exception in worker thread '
-                             'for (%s, %s)' % (self.host, self.scheme))
-        logger.debug("%s terminating", self)
-
-    def getConnection(self, url):
-        """Get a connection to the given URL.
-        
-        Blocks until either a connection is established, or
-        we are asked to shut-down.  Includes a simple strategy for
-        slowing down the retry rate, retrying from 2 seconds to 2 minutes
-        until the connection appears.
-        """
-
-        wait_time = 1
-        while not self.stopping:
-            try:
-                return self.producer.getConnection(url)
-            except socket.error, e:
-                # max wait time is 2 minutes
-                wait_time = min(wait_time * 2, 120)
-                logger.debug("Error %s connecting to %s - will "
-                             "retry in %d second(s)", e, url, wait_time)
-                for i in xrange(wait_time):
-                    if self.stopping:
-                        break
-                    time.sleep(1)
-        return None # must be stopping!
-
-

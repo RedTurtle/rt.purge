@@ -14,7 +14,11 @@ class TraversablePurgePaths(object):
         self.context = context
         
     def getRelativePaths(self):
-        return [self.context.absolute_url_path()]
+        paths = []
+        if self.context.plone_utils.isDefaultPage(self.context):
+            paths.append(self.context.aq_inner.aq_parent.absolute_url_path())
+        paths.append(self.context.absolute_url_path())
+        return paths
     
     def getAbsolutePaths(self):
         return []

@@ -1,4 +1,3 @@
-from StringIO import StringIO
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 
@@ -22,19 +21,15 @@ class PurgeImmediately(object):
         settings = registry.forInterface(ICachePurgingSettings)
         
         purger = getUtility(IPurger)
-        
-        out = StringIO()
-        
+      
         for path in getPathsToPurge(self.context, self.request):
             for url in getURLsToPurge(path, settings.cachingProxies):
                 status, xcache, xerror = purger.purgeSync(url)
-                #print >>out, "Purged", url, "Status", status, "X-Cache", xcache, "Error:", xerror
-                #print "Purged", url, "Status", status, "X-Cache", xcache, "Error:", xerror
        
-        if status != 200: #error
-            self.context.plone_utils.addPortalMessage("Error purging context.", 'error')
-        else: 
-            self.context.plone_utils.addPortalMessage("Context purged.", 'info')
+                if status != 200: #error
+                    self.context.plone_utils.addPortalMessage("Error purging %s." % url, 'error')
+                else: 
+                    self.context.plone_utils.addPortalMessage("%s purged." % url, 'info')
 
         self.request.response.redirect(self.context.absolute_url())
         return ''
