@@ -1,5 +1,5 @@
 import urlparse
-
+import re
 from zope.interface import Interface, implements
 from zope.component import adapts, queryUtility
 
@@ -71,13 +71,17 @@ class DefaultRewriter(object):
         paths = []
         for domain in domains:
             scheme, host = urlparse.urlparse(domain)[:2]
-            paths.append(
-                '/VirtualHostBase/%(scheme)s/%(host)s%(root)s/VirtualHostRoot%(prefix)s%(path)s' %
-                    {'scheme':  scheme,
-                     'host':    host,
-                     'root':    virtualRoot,
-                     'prefix':  pathPrefix,
-                     'path':    path,
-                    }
-                )
+            ports = re.compile('/.+/' + host + '(:[0-9]+)').findall(self.request.get('PATH_INFO'))
+            if not ports: ports = ['']
+            for port in ports:
+                paths.append(
+                    '/VirtualHostBase/%(scheme)s/%(host)s%(port)s%(root)s/VirtualHostRoot%(prefix)s%(path)s' %
+                        {'scheme':  scheme,
+                         'host':    host,
+                         'root':    virtualRoot,
+                         'prefix':  pathPrefix,
+                         'path':    path,
+                         'port':    port,
+                        }
+                    )
         return paths
