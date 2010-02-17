@@ -6,6 +6,7 @@
     
     <include package="zope.annotation" />
     <include package="plone.registry" />
+    <include package="plone.app.registry" />
     
     <!-- Default rewriter and purge urls -->
     <adapter factory=".rewrite.DefaultRewriter" />
