@@ -71,10 +71,10 @@ class DefaultRewriter(object):
         paths = []
         for domain in domains:
             scheme, host = urlparse.urlparse(domain)[:2]
-            ports = re.compile('/.+/' + host + '(:[0-9]+)').findall(self.request.get('PATH_INFO'))
-            if not ports: ports = ['']
-            for port in ports:
-                paths.append(
+	    if scheme == 'http': port = ':80'
+	    elif scheme == 'https': port = ':443'
+	    else: port = ''
+            paths.append(
                     '/VirtualHostBase/%(scheme)s/%(host)s%(port)s%(root)s/VirtualHostRoot%(prefix)s%(path)s' %
                         {'scheme':  scheme,
                          'host':    host,
