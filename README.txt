@@ -10,8 +10,21 @@ __ http://www.varnish-cache.org/
 Configuration
 =============
 
-First of all, take a look to the *public.vcl* example file you wil find in the product source "template"
-directory.
+First of all, take a look to the *public.vcl* example file you will find in the product source "template"
+directory. With a Varnish configuration similar to this one can make the purge product simpler to be used.
+
+After intallation, you need to go to the Plone Control Panel and modify the configuration in the
+"*Configuration registry*".
+
+Enable the purgin putting to "True" the "*Enable purging*" option, then be sure of what you must fill
+in the "*Caching proxies*" or "*Domains*" sections.
+
+Caching proxies is the most important option. Fill it with the URL to the Varnish instance, with the port.
+Example::
+
+    http://localhost:8888
+
+Varnish must be configured to take connections from Zope instance.
 
 Dependencies
 ============
