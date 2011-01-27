@@ -89,7 +89,8 @@ Here a good version pinning configuration::
 Plone 4?
 --------
 
-Plone 4 can use `plone.app.caching`__ so you don't need this product.
+Plone 4 can use `plone.app.caching`__ so you don't need this product. In facts rt.purge is a simple
+port of plone.app.caching to Plone 3. 
 
 Troubleshooting
 ===============
