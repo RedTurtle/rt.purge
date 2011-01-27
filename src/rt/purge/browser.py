@@ -14,22 +14,24 @@ class PurgeImmediately(object):
     
     def __call__(self):
         
-        if not isCachePurgingEnabled():
-            return 'Caching not enabled'
-        
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(ICachePurgingSettings)
-        
-        purger = getUtility(IPurger)
-      
-        for path in getPathsToPurge(self.context, self.request):
-            for url in getURLsToPurge(path, settings.cachingProxies):
-                status, xcache, xerror = purger.purgeSync(url)
-       
-                if status != 200: #error
-                    self.context.plone_utils.addPortalMessage("Error purging %s." % url, 'error')
-                else: 
-                    self.context.plone_utils.addPortalMessage("%s purged." % url, 'info')
+        if isCachePurgingEnabled():
+            
+            registry = getUtility(IRegistry)
+            settings = registry.forInterface(ICachePurgingSettings)
+            
+            purger = getUtility(IPurger)
+          
+            for path in getPathsToPurge(self.context, self.request):
+                for url in getURLsToPurge(path, settings.cachingProxies):
+                    status, xcache, xerror = purger.purgeSync(url)
+           
+                    if status != 200: #error
+                        self.context.plone_utils.addPortalMessage('Error purging "%s". Status (%s)' % (url, status), 'error')
+                    else: 
+                        self.context.plone_utils.addPortalMessage("%s purged." % url, 'info')
+        else:
+            self.context.plone_utils.addPortalMessage("Chaching not enabled.\nPlease see the site configuration",
+                                                      'error')
 
         self.request.response.redirect(self.context.absolute_url())
         return ''

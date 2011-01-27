@@ -1,8 +1,14 @@
 Changelog
 =========
 
-1.0 - 15/02/2010 Re;eased
--------------------------
+1.0.1 (Unreleased)
+------------------
+
+* z3c.autoinclude support [keul]
+* "Error purging" will also dispay the error code [keul]
+
+1.0 - 15/02/2010
+----------------
 
 * Initial release
 

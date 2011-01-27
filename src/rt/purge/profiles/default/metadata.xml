@@ -1,6 +1,6 @@
 <metadata>
   <description>rt.purge</description>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <dependencies>
     <dependency>profile-plone.app.registry:default</dependency>
   </dependencies>
