@@ -6,6 +6,7 @@ Changelog
 
 * z3c.autoinclude support [keul]
 * "Error purging" will also dispay the error code [keul]
+* More documentation [keul]
 
 1.0 - 15/02/2010
 ----------------

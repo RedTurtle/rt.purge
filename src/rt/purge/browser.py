@@ -30,7 +30,7 @@ class PurgeImmediately(object):
                     else: 
                         self.context.plone_utils.addPortalMessage("%s purged." % url, 'info')
         else:
-            self.context.plone_utils.addPortalMessage("Chaching not enabled.\nPlease see the site configuration",
+            self.context.plone_utils.addPortalMessage("Chaching not enabled. Please see the site configuration",
                                                       'error')
 
         self.request.response.redirect(self.context.absolute_url())
