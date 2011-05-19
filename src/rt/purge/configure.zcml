@@ -37,8 +37,7 @@
         title="rt.purge"
         directory="profiles/default"
         description="Installs purging"
-        provides="Products.GenericSetup.interfaces.EXTENSION"
-                                                      />
+        provides="Products.GenericSetup.interfaces.EXTENSION" />
 
 
 </configure>
