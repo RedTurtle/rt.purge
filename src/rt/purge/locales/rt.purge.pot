@@ -1,0 +1,79 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-05-23 15:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: rt.purge\n"
+
+#: ../interfaces.py:85
+msgid "Automatically purge a page when modified, if in ones of those review states"
+msgstr ""
+
+#: ../interfaces.py:28
+msgid "Caching proxies"
+msgstr ""
+
+#: ../browser.py:43
+msgid "Chaching not enabled. Please see the site configuration"
+msgstr ""
+
+#: ../interfaces.py:68
+msgid "Domains"
+msgstr ""
+
+#: ../interfaces.py:22
+msgid "Enable purging"
+msgstr ""
+
+#: ../interfaces.py:23
+msgid "If disabled, no purging will take place"
+msgstr ""
+
+#: ../interfaces.py:29
+msgid "Provide the URLs of each proxy to which PURGE requests shoudl be sent."
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Purge page"
+msgstr ""
+
+#: ../interfaces.py:84
+msgid "Review states to purge"
+msgstr ""
+
+#: ../interfaces.py:42
+msgid "Send PURGE requests with virtual hosting paths"
+msgstr ""
+
+#. Default: "This option is only relevant if you are using virtual hosting and you have enabled the option to send PURGE requests with virtual hosting URLs above. If your site is served on multiple domains e.g. http://example.org and http://www.example.org you may wish to purge both. If so, list all your domains here."
+#: ../interfaces.py:69
+msgid "help_domains"
+msgstr ""
+
+#. Default: "This option is only relevant if you are using virtual hosting with Zope's VirtualHostMonster. This relies on special tokens (VirtualHostBase and VirtualHostRoot) in the URL to instruct Zope about the types of URLs that the user sees. If virtual host URLs are in use and this option is set, PURGE requests will be sent to the caching proxy with the virtual hosting tokens in place. This makes sense if there is a web server in front of your caching proxy performing the rewrites necessary to translate a user-facing URL into a virtual hosting URL, so that the requests the caching proxy sees have the rewrite information in them. Conversely, if the rewrite is done in or behind the caching proxy, you want to disable this option, so that the PURGE requests use URLs that match those seen by the caching proxy as they come from the client."
+#: ../interfaces.py:43
+msgid "help_virtualHosting"
+msgstr ""
+
+#. Default: "Error purging \"${url}\". Status (${status})"
+#: ../browser.py:34
+msgid "purging_error"
+msgstr ""
+
+#. Default: "${url} purged."
+#: ../browser.py:39
+msgid "url_purged"
+msgstr ""
+

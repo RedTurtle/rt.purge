@@ -1,0 +1,80 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-05-23 15:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: it\n"
+"Language-Name: Italian\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: rt.purge\n"
+
+#: ../interfaces.py:85
+msgid "Automatically purge a page when modified, if in ones of those review states"
+msgstr "Invalida automaticamente una pagina quando modificata, se in uno di questi stati"
+
+#: ../interfaces.py:28
+msgid "Caching proxies"
+msgstr "Proxy di cache"
+
+#: ../browser.py:43
+msgid "Chaching not enabled. Please see the site configuration"
+msgstr "Cache non abilitata. Prego controlla la configurazione del sito"
+
+#: ../interfaces.py:68
+msgid "Domains"
+msgstr "Domini"
+
+#: ../interfaces.py:22
+msgid "Enable purging"
+msgstr "Abilita purging"
+
+#: ../interfaces.py:23
+msgid "If disabled, no purging will take place"
+msgstr "Se disabilitato, nessuna invalidazione verrà eseguita"
+
+#: ../interfaces.py:29
+msgid "Provide the URLs of each proxy to which PURGE requests shoudl be sent."
+msgstr "Fornisci gli URL per ogni proxy ai quali le richieste di PURGE devono essere inviate."
+
+#: ../profiles/default/actions.xml
+msgid "Purge page"
+msgstr "Invalida pagina"
+
+#: ../interfaces.py:84
+msgid "Review states to purge"
+msgstr "Stati di revisione da invalidare"
+
+#: ../interfaces.py:42
+msgid "Send PURGE requests with virtual hosting paths"
+msgstr "Invia richieste di PURGE con virtual hosting paths"
+
+#. Default: "This option is only relevant if you are using virtual hosting and you have enabled the option to send PURGE requests with virtual hosting URLs above. If your site is served on multiple domains e.g. http://example.org and http://www.example.org you may wish to purge both. If so, list all your domains here."
+#: ../interfaces.py:69
+#, fuzzy
+msgid "help_domains"
+msgstr "Questa optione è rilevante solo se stai usando hosting e hai abilitato l'opzione di invare richieste di PURGE con i virtual hosting sopra. Se il tuo sito è servito su domini multipli, ad esempio http://example.org e http://www.example.org, potresti volere invalidare entrambi. Se così, inserisci tutti i domini qui."
+
+#. Default: "This option is only relevant if you are using virtual hosting with Zope's VirtualHostMonster. This relies on special tokens (VirtualHostBase and VirtualHostRoot) in the URL to instruct Zope about the types of URLs that the user sees. If virtual host URLs are in use and this option is set, PURGE requests will be sent to the caching proxy with the virtual hosting tokens in place. This makes sense if there is a web server in front of your caching proxy performing the rewrites necessary to translate a user-facing URL into a virtual hosting URL, so that the requests the caching proxy sees have the rewrite information in them. Conversely, if the rewrite is done in or behind the caching proxy, you want to disable this option, so that the PURGE requests use URLs that match those seen by the caching proxy as they come from the client."
+#: ../interfaces.py:43
+msgid "help_virtualHosting"
+msgstr "Questa opzione è rilevante solo se stati usando virtual hosting con VirtualHostMonster di Zope Questo richiede speciali token (VirtualHostBase e VirtualHostRoot) nell'URL per avvertire Zope riguardo i tipi di URL che l'utente vede. Se gli URL di virtual host sono in uso e questa opzione è impostata, le richieste di PURGE saranno invate al proxy di cache con i token di virtual hosting. Questo ha senso se c'è un web server davanti al tuo sistema di cache che esegue le regole di rewrite necessarie a tradurre un URL utente in un URL di virtual hosting, così che la richiesta che il proxy vede abbia le informazioni di rewrite. Conversely, if the rewrite is done in or behind the caching proxy, you want to disable this option, so that the PURGE requests use URLs that match those seen by the caching proxy as they come from the client."
+
+#. Default: "Error purging \"${url}\". Status (${status})"
+#: ../browser.py:34
+msgid "purging_error"
+msgstr "Errore nell'invalidare \"${url}\". Status (${status})"
+
+#. Default: "${url} purged."
+#: ../browser.py:39
+msgid "url_purged"
+msgstr "${url} invalidato."
+

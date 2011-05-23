@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from zope.component import getUtility, getMultiAdapter
+from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 from rt.purge.interfaces import ICachePurgingSettings
 from rt.purge.interfaces import IPurgerLayer
 from Products.CMFCore.utils import getToolByName
+from AccessControl import Unauthorized
 from plone.browserlayer.utils import registered_layers
 
 from rt.purge.utils import isCachePurgingEnabled
@@ -19,4 +20,7 @@ def purgeContent(object, event):
         #mtool = getToolByName(object, 'portal_membership')
         review_state = wtool.getInfoFor(object, 'review_state')
         if review_state in settings.review_state:
-            getMultiAdapter((object, object.REQUEST), name='rt.purge')()
+            try:
+                object.restrictedTraverse('@@rt.purge')()
+            except Unauthorized:
+                pass

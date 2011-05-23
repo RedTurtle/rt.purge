@@ -6,7 +6,10 @@ from plone.registry.interfaces import IRegistry
 from rt.purge.interfaces import IPurger, ICachePurgingSettings
 from rt.purge.utils import getURLsToPurge, isCachePurgingEnabled, getPathsToPurge
 
-class PurgeImmediately(object):
+from Products.Five.browser import BrowserView
+from rt.purge import purgerMessageFactory as _
+
+class PurgeImmediately(BrowserView):
     """Purge immediately
     """
     
@@ -14,7 +17,7 @@ class PurgeImmediately(object):
         self.context = context
         self.request = request
     
-    def __call__(self):
+    def __call__(self, *args, **kwargs):
         
         if isCachePurgingEnabled():
             
@@ -28,12 +31,16 @@ class PurgeImmediately(object):
                     status, xcache, xerror = purger.purgeSync(url)
            
                     if status != 200: #error
-                        self.context.plone_utils.addPortalMessage('Error purging "%s". Status (%s)' % (url, status),
+                        self.context.plone_utils.addPortalMessage(_('purging_error',
+                                                                    default='Error purging "${url}". Status (${status})',
+                                                                    mapping={'url': url, 'status' : status}),
                                                                   'error')
                     else: 
-                        self.context.plone_utils.addPortalMessage("%s purged." % url, 'info')
+                        self.context.plone_utils.addPortalMessage(_('url_purged',
+                                                                    default=u"${url} purged.",
+                                                                    mapping={'url': url}), 'info')
         else:
-            self.context.plone_utils.addPortalMessage("Chaching not enabled. Please see the site configuration",
+            self.context.plone_utils.addPortalMessage(_("Chaching not enabled. Please see the site configuration"),
                                                       'error')
 
         self.request.response.redirect(self.context.absolute_url())

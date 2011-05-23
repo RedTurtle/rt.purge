@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
+
 from zope.interface import Interface
 from zope import schema
-from zope.i18nmessageid import MessageFactory
 
-_ = MessageFactory('rt.purge')
+from rt.purge import purgerMessageFactory as _
 
 class IPurgerLayer(Interface):
     """Marker interface for the rt.purge layer"""
@@ -39,7 +40,8 @@ class ICachePurgingSettings(Interface):
     
     virtualHosting = schema.Bool(
             title=_(u"Send PURGE requests with virtual hosting paths"),
-            description=_(u"This option is only relevant if you are using "
+            description=_('help_virtualHosting',
+                          default=u"This option is only relevant if you are using "
                           u"virtual hosting with Zope's VirtualHostMonster. "
                           u"This relies on special tokens (VirtualHostBase "
                           u"and VirtualHostRoot) in the URL to instruct "
@@ -64,13 +66,14 @@ class ICachePurgingSettings(Interface):
     
     domains = schema.Tuple(
             title=_(u"Domains"),
-            description=_(u"This option is only relevant if you are using "
+            description=_('help_domains',
+                          default=u"This option is only relevant if you are using "
                           u"virtual hosting and you have enabled the option "
                           u"to send PURGE requests with virtual hosting URLs "
-                          u"above. If you your site is served on multiple "
+                          u"above. If your site is served on multiple "
                           u"domains e.g. http://example.org and "
                           u"http://www.example.org you may wish to purge "
-                          u"both. If so, list all your domains here"),
+                          u"both. If so, list all your domains here."),
             required=False,
             default=(),
             missing_value=(),
