@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.1.0 (Unreleased)
+------------------
+
+* Documentation fixes [keul]
+* Added a ``review_state`` field [keul]
+* Fixed permission of the "Purge" action menu to the
+  proper ones [keul]
+
 1.0.1 (2011-01-27)
 ------------------
 

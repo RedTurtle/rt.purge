@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 
@@ -26,7 +28,8 @@ class PurgeImmediately(object):
                     status, xcache, xerror = purger.purgeSync(url)
            
                     if status != 200: #error
-                        self.context.plone_utils.addPortalMessage('Error purging "%s". Status (%s)' % (url, status), 'error')
+                        self.context.plone_utils.addPortalMessage('Error purging "%s". Status (%s)' % (url, status),
+                                                                  'error')
                     else: 
                         self.context.plone_utils.addPortalMessage("%s purged." % url, 'info')
         else:

@@ -26,6 +26,15 @@ Example::
 
 Varnish must be configured to take connections from Zope instance.
 
+Automaticallu purge contents
+----------------------------
+
+Filling the ``review_state`` data with a set of states of you workflow(s) make possible for your users
+to enable automatic purging. When a content in on of that state is updated, the purging will start
+automatically.
+
+This can be useful for users that have the power to edit (as example) published contents.
+
 Dependencies
 ============
 
@@ -69,7 +78,7 @@ Here a good version pinning configuration::
     ...
     [versions]
     ...
-    plone.app.registry = 1.0b2
+    plone.app.registry = 1.0b1
     zope.i18n = 3.4.0 
     zope.location = 3.4.0
     zope.site = 3.5.1
@@ -77,7 +86,6 @@ Here a good version pinning configuration::
     z3c.form = 2.3.3
     zope.schema = 3.6.4
     zope.proxy = 3.4.2
-    plone.app.registry = 1.0b1
     plone.app.z3cform = 0.4.9
     plone.registry = 1.0b1
     plone.z3cform = 0.5.10

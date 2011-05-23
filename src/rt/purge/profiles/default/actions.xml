@@ -9,7 +9,7 @@
    <property name="icon_expr"></property>
    <property name="available_expr"></property>
    <property name="permissions">
-    <element value="Modify portal content"/>
+    <element value="plone.cachepurging: Manually purge objects"/>
    </property>
    <property name="visible">True</property>
   </object>

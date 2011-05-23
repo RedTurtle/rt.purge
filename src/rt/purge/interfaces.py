@@ -3,7 +3,10 @@ from zope import schema
 from zope.i18nmessageid import MessageFactory
 
 _ = MessageFactory('rt.purge')
-    
+
+class IPurgerLayer(Interface):
+    """Marker interface for the rt.purge layer"""
+
 class IPurgePaths(Interface):
     """ """
 
@@ -73,6 +76,18 @@ class ICachePurgingSettings(Interface):
             missing_value=(),
             value_type=schema.URI(),
         )
+
+    review_state = schema.Tuple(
+            title=_(u"Review states to purge"),
+            description=_(u"Automatically purge a page when modified, if in "
+                          u"ones of those review states"),
+            required=False,
+            default=(),
+            missing_value=(),
+            #value_type=schema.Choice(vocabulary='plone.app.vocabularies.WorkflowStates'),
+            value_type=schema.TextLine(),
+        )
+
 
 class IPurgePathRewriter(Interface):
     """Used to rewrite paths for purging. This should be registered as an
