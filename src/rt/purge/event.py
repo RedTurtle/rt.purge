@@ -13,14 +13,16 @@ from rt.purge.utils import isCachePurgingEnabled
 
 def purgeContent(object, event):
     
-    registry = getUtility(IRegistry)
-    if IPurgerLayer in registered_layers() and isCachePurgingEnabled(registry):
-        settings = registry.forInterface(ICachePurgingSettings)
-        wtool = getToolByName(object, 'portal_workflow')
-        #mtool = getToolByName(object, 'portal_membership')
-        review_state = wtool.getInfoFor(object, 'review_state')
-        if review_state in settings.review_state:
-            try:
-                object.restrictedTraverse('@@rt.purge')()
-            except Unauthorized:
-                pass
+
+    if IPurgerLayer in registered_layers():
+        registry = getUtility(IRegistry)
+        if isCachePurgingEnabled(registry):
+            settings = registry.forInterface(ICachePurgingSettings)
+            wtool = getToolByName(object, 'portal_workflow')
+            #mtool = getToolByName(object, 'portal_membership')
+            review_state = wtool.getInfoFor(object, 'review_state')
+            if review_state in settings.review_state:
+                try:
+                    object.restrictedTraverse('@@rt.purge')()
+                except Unauthorized:
+                    pass
