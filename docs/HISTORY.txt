@@ -4,7 +4,7 @@ Changelog
 1.1.2 (Unreleased)
 ------------------
 
-* do not break if the current content use not workflows [keul]
+* do not break if the current content don't use workflows [keul]
 * fixed a bug that, when invalidate a file content from menu,
   was also downloading the file [keul]
 * error type for a 404 code is "warning" [keul] 
