@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.1.1 (2011-05-26)
+------------------
+
+* Fixed a bug that break Plone if rt.purge is there but not
+  installed [keul]
+
 1.1.0 (2011-05-23)
 ------------------
 
