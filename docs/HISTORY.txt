@@ -7,6 +7,7 @@ Changelog
 * do not break if the current content use not workflows [keul]
 * fixed a bug that, when invalidate a file content from menu,
   was also downloading the file [keul]
+* error type for a 404 code is "warning" [keul] 
 
 1.1.1 (2011-05-26)
 ------------------

@@ -34,7 +34,7 @@ class PurgeImmediately(BrowserView):
                         self.context.plone_utils.addPortalMessage(_('purging_error',
                                                                     default='Error purging "${url}". Status (${status})',
                                                                     mapping={'url': url, 'status' : status}),
-                                                                  'error')
+                                                                  'warning')
                     else: 
                         self.context.plone_utils.addPortalMessage(_('url_purged',
                                                                     default=u"${url} purged.",
