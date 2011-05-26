@@ -43,6 +43,6 @@ class PurgeImmediately(BrowserView):
             self.context.plone_utils.addPortalMessage(_("Chaching not enabled. Please see the site configuration"),
                                                       'error')
 
-        self.request.response.redirect(self.context.absolute_url())
+        self.request.response.redirect(self.context.absolute_url()+'/view')
         return ''
         

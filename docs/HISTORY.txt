@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.1.2 (Unreleased)
+------------------
+
+* do not break if the current content use not workflows [keul]
+* fixed a bug that, when invalidate a file content from menu,
+  was also downloading the file [keul]
+
 1.1.1 (2011-05-26)
 ------------------
 

@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.1.1'
+version = '1.1.2'
 
 setup(name='rt.purge',
       version=version,
@@ -10,13 +10,14 @@ setup(name='rt.purge',
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
+        "Framework :: Plone",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
-      keywords='plone varnish purge rt',
+      keywords='plone varnish purge cache',
       author='redturtle team',
       author_email='andrew.mleczko@redturtle.it',
-      url='http://www.redturtle.it',
+      url='http://www.redturtle.it/',
       license='GPL',
       packages = find_packages('src'),
       package_dir = {'': 'src'},      
