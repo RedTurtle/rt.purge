@@ -134,7 +134,7 @@ Troubleshooting
             }
             ....
 
-    Be sure that the "*acl purge*" is the equal to the host name used to call Varnish.
+    Be sure that the "*acl purge*" is equal to the host name used to call Varnish.
     
     Take a look at the example .vcl file provided with the product.
 
