@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.1.3 (2011-06-14)
+------------------
+
+* invalidate a path only one time for request, even if multiple
+  adapter return the path more than a time [keul]
+* added a flag (``friendly_messages``) for reduce and make more user
+  friendly the purge/error messages [keul]
+
 1.1.2 (2011-06-10)
 ------------------
 

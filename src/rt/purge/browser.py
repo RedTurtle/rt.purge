@@ -23,22 +23,38 @@ class PurgeImmediately(BrowserView):
             
             registry = getUtility(IRegistry)
             settings = registry.forInterface(ICachePurgingSettings)
+            friendly_messages = settings.friendly_messages
             
             purger = getUtility(IPurger)
-          
-            for path in getPathsToPurge(self.context, self.request):
+
+            purgeCounter = 0
+            for path in set(getPathsToPurge(self.context, self.request)):
                 for url in getURLsToPurge(path, settings.cachingProxies):
                     status, xcache, xerror = purger.purgeSync(url)
            
                     if status != 200: #error
-                        self.context.plone_utils.addPortalMessage(_('purging_error',
-                                                                    default='Error purging "${url}". Status (${status})',
-                                                                    mapping={'url': url, 'status' : status}),
-                                                                  'warning')
+                        if not friendly_messages:
+                            self.context.plone_utils.addPortalMessage(_('purging_error',
+                                                                        default='Error purging "${url}". Status (${status})',
+                                                                        mapping={'url': url, 'status' : status}),
+                                                                      'warning')
                     else: 
-                        self.context.plone_utils.addPortalMessage(_('url_purged',
-                                                                    default=u"${url} purged.",
-                                                                    mapping={'url': url}), 'info')
+                        if not friendly_messages:
+                            self.context.plone_utils.addPortalMessage(_('url_purged',
+                                                                        default=u"${url} purged.",
+                                                                        mapping={'url': url}), 'info')
+                        purgeCounter+=1
+
+            if friendly_messages:
+                if purgeCounter==0:
+                    self.context.plone_utils.addPortalMessage(_('purging_friendly_error',
+                                                                default='Unable to purge "${url}".',
+                                                                mapping={'url': self.context.absolute_url(), }),
+                                                              'warning')
+                else:
+                    self.context.plone_utils.addPortalMessage(_('url_purged',
+                                                                default=u"${url} purged.",
+                                                                mapping={'url': self.context.absolute_url()}), 'info')
         else:
             self.context.plone_utils.addPortalMessage(_("Chaching not enabled. Please see the site configuration"),
                                                       'error')

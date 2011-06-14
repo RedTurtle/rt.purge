@@ -91,6 +91,16 @@ class ICachePurgingSettings(Interface):
             value_type=schema.TextLine(),
         )
 
+    friendly_messages = schema.Bool(
+            title=_(u"Show only friendly messages"),
+            description=_('help_friendly_messages',
+                          default=u"Instead of showing a lot of messages for every purged or not "
+                                   "purged URL, shows only a single message. OK is a single purge has "
+                                   "been done, Error/Warning if no purge has been done."),
+            required=False,
+            default=False,
+        )
+
 
 class IPurgePathRewriter(Interface):
     """Used to rewrite paths for purging. This should be registered as an
