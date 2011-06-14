@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.2 (Unreleased)
+1.1.2 (2011-06-10)
 ------------------
 
 * do not break if the current content don't use workflows [keul]
