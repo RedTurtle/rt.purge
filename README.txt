@@ -26,7 +26,7 @@ Example::
 
 Varnish must be configured to take connections from Zope instance.
 
-Automaticallu purge contents
+Automatically purge contents
 ----------------------------
 
 Filling the ``review_state`` data with a set of states of you workflow(s) make possible for your users
@@ -34,6 +34,12 @@ to enable automatic purging. When a content in on of that state is updated, the 
 automatically.
 
 This can be useful for users that have the power to edit (as example) published contents.
+
+Archetypes purge
+----------------
+
+For purge well some Archetypes file-like content at ATImage and ATFile, think about install also
+``rt.atpurge``.
 
 Dependencies
 ============
