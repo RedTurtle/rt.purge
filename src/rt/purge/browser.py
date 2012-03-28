@@ -19,6 +19,8 @@ class PurgeImmediately(BrowserView):
     
     def __call__(self, *args, **kwargs):
         
+        verbose = kwargs.get('verbose', True)
+        
         if isCachePurgingEnabled():
             
             registry = getUtility(IRegistry)
@@ -33,19 +35,19 @@ class PurgeImmediately(BrowserView):
                     status, xcache, xerror = purger.purgeSync(url)
            
                     if status != 200: #error
-                        if not friendly_messages:
+                        if verbose and not friendly_messages:
                             self.context.plone_utils.addPortalMessage(_('purging_error',
                                                                         default='Error purging "${url}". Status (${status})',
                                                                         mapping={'url': url, 'status' : status}),
                                                                       'warning')
                     else: 
-                        if not friendly_messages:
+                        if verbose and not friendly_messages:
                             self.context.plone_utils.addPortalMessage(_('url_purged',
                                                                         default=u"${url} purged.",
                                                                         mapping={'url': url}), 'info')
                         purgeCounter+=1
 
-            if friendly_messages:
+            if verbose and friendly_messages:
                 if purgeCounter==0:
                     self.context.plone_utils.addPortalMessage(_('purging_friendly_error',
                                                                 default='Unable to purge "${url}".',
@@ -56,8 +58,9 @@ class PurgeImmediately(BrowserView):
                                                                 default=u"${url} purged.",
                                                                 mapping={'url': self.context.absolute_url()}), 'info')
         else:
-            self.context.plone_utils.addPortalMessage(_("Chaching not enabled. Please see the site configuration"),
-                                                      'error')
+            if verbose:
+                self.context.plone_utils.addPortalMessage(_("Chaching not enabled. Please see the site configuration"),
+                                                          'error')
 
         self.request.response.redirect(self.context.absolute_url()+'/view')
         return ''

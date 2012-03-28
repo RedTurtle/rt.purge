@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.3.0 (Unreleased)
+------------------
+
+* the ``rt.purge`` view now support a keyword argument: ``verbose`` (default True).
+  When False, do not display any portal message status [keul]
+
 1.2.0 (2011-06-14)
 ------------------
 
