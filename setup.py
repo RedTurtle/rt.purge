@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.3.0'
+version = '1.4.0.dev0'
 
 setup(name='rt.purge',
       version=version,
@@ -16,8 +16,8 @@ setup(name='rt.purge',
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='plone varnish purge cache',
-      author='redturtle team',
-      author_email='andrew.mleczko@redturtle.it',
+      author='RedTurtle Technology',
+      author_email='sviluppoplone@redturte.it',
       url='http://www.redturtle.it/',
       license='GPL',
       packages = find_packages('src'),
@@ -27,7 +27,6 @@ setup(name='rt.purge',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'Plone<4.0dev',
           'zope.interface',
           'zope.component',
           'zope.event',
