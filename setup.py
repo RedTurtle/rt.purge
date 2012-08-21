@@ -12,6 +12,9 @@ setup(name='rt.purge',
       classifiers=[
         "Framework :: Plone",
         "Framework :: Plone :: 3.3",
+        "Framework :: Plone :: 4.0",
+        "Framework :: Plone :: 4.1",
+        "Framework :: Plone :: 4.2",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
@@ -34,7 +37,6 @@ setup(name='rt.purge',
           'zope.lifecycleevent',
           'zope.i18nmessageid',
           'plone.app.registry',
-          # -*- Extra requirements: -*-
       ],
       entry_points="""
       # -*- Entry points: -*-

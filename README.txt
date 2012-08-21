@@ -104,7 +104,7 @@ Plone 4?
 --------
 
 Plone 4 can use `plone.app.caching`__ so you don't need this product. In facts rt.purge is a simple
-port of plone.app.caching to Plone 3. 
+port of plone.app.caching to Plone 3.
 
 Troubleshooting
 ===============
@@ -177,7 +177,4 @@ Troubleshooting
     think about comment it (is not needed, of course).
     
     Take a look at the example .vcl file provided with the product.
-
-
-
 

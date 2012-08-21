@@ -1,0 +1,4 @@
+<layers>
+    <layer name="rt.purge" interface="rt.purge.interfaces.IPurgerLayer"
+	       remove="True"/>
+</layers>

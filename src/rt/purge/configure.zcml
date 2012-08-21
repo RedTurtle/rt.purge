@@ -43,7 +43,14 @@
         name="default"
         title="rt.purge"
         directory="profiles/default"
-        description="Installs purging"
+        description="Installs rt.purge"
+        provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+     <genericsetup:registerProfile
+        name="uninstall"
+        title="rt.purge: uninstall"
+        directory="profiles/uninstall"
+        description="Uninstall rt.purge"
         provides="Products.GenericSetup.interfaces.EXTENSION" />
 
   	 <subscriber 
