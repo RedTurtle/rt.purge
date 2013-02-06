@@ -8,7 +8,7 @@ Changelog
 * Added licences files [keul]
 * Removed the review state autopurge feature
   (if needed, can be done in another package) [keul]
-* ``friendly_messages``has been transformed to a more flexible ``verbosity``
+* ``friendly_messages`` has been transformed to a more flexible ``verbosity``
   option [keul]
 * added a configuration panel [keul]
 
