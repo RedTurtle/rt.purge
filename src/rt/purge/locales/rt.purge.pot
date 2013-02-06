@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-02-06 11:04+0000\n"
+"POT-Creation-Date: 2013-02-06 11:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Caching proxies"
 msgstr ""
 
-#: ../browser/controlpanel.py:35
+#: ../browser/controlpanel.py:33
 msgid "Cancel"
 msgstr ""
 
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Chaching not enabled. Please see the site configuration"
 msgstr ""
 
-#: ../browser/controlpanel.py:31
+#: ../browser/controlpanel.py:29
 msgid "Changes saved"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Domains"
 msgstr ""
 
-#: ../browser/controlpanel.py:37
+#: ../browser/controlpanel.py:35
 msgid "Edit cancelled"
 msgstr ""
 
@@ -53,6 +53,13 @@ msgstr ""
 msgid "If disabled, no purging will take place"
 msgstr ""
 
+msgid "Invalidate (purge) documents cached in Varnish"
+msgstr ""
+
+#: ../interfaces.py:83
+msgid "Message verbosity level"
+msgstr ""
+
 #: ../vocabularies.py:26
 msgid "No messages at all"
 msgstr ""
@@ -65,21 +72,17 @@ msgstr ""
 msgid "Purge page"
 msgstr ""
 
-#: ../browser/controlpanel.py:20
+#: ../browser/controlpanel.py:18
 #: ../profiles/default/controlpanel.xml
 msgid "Purge settings"
 msgstr ""
 
-#: ../browser/controlpanel.py:24
+#: ../browser/controlpanel.py:22
 msgid "Save"
 msgstr ""
 
 #: ../interfaces.py:41
 msgid "Send PURGE requests with virtual hosting paths"
-msgstr ""
-
-#: ../interfaces.py:83
-msgid "Show only friendly messages"
 msgstr ""
 
 #: ../vocabularies.py:25
@@ -91,14 +94,14 @@ msgstr ""
 msgid "help_domains"
 msgstr ""
 
-#. Default: "Instead of showing a lot of messages for every purged or not purged URL, shows only a single message. OK is a single purge has been done, Error/Warning if no purge has been done."
-#: ../interfaces.py:84
-msgid "help_friendly_messages"
+#. Default: "Manage general site configuration for rt.purge"
+#: ../browser/controlpanel.py:19
+msgid "help_rtpurge_settings_editform"
 msgstr ""
 
-#. Default: "Manage general site configuration for rt.purge"
-#: ../browser/controlpanel.py:21
-msgid "help_rtpurge_settings_editform"
+#. Default: "Choose your favorite verbosity level when performing manual purging.\n\"Friendly message\" (the default) will display a positive message when at least one cache backend page has been purger.\n\"Verbose message\" will display details for every purging operation.\nUse \"no messages\" if you don't want to print anything about purging."
+#: ../interfaces.py:84
+msgid "help_verbosity"
 msgstr ""
 
 #. Default: "This option is only relevant if you are using virtual hosting with Zope's VirtualHostMonster. This relies on special tokens (VirtualHostBase and VirtualHostRoot) in the URL to instruct Zope about the types of URLs that the user sees. If virtual host URLs are in use and this option is set, PURGE requests will be sent to the caching proxy with the virtual hosting tokens in place. This makes sense if there is a web server in front of your caching proxy performing the rewrites necessary to translate a user-facing URL into a virtual hosting URL, so that the requests the caching proxy sees have the rewrite information in them. Conversely, if the rewrite is done in or behind the caching proxy, you want to disable this option, so that the PURGE requests use URLs that match those seen by the caching proxy as they come from the client."

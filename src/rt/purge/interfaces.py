@@ -80,11 +80,13 @@ class ICachePurgingSettings(Interface):
         )
 
     verbosity = schema.Choice(
-            title=_(u"Show only friendly messages"),
-            description=_('help_friendly_messages',
-                          default=u"Instead of showing a lot of messages for every purged or not "
-                                   "purged URL, shows only a single message. OK is a single purge has "
-                                   "been done, Error/Warning if no purge has been done."),
+            title=_(u"Message verbosity level"),
+            description=_('help_verbosity',
+                          default=u"Choose your favorite verbosity level when performing manual purging.\n"
+                                   "\"Friendly message\" (the default) will display a positive message when at least one "
+                                   "cache backend page has been purger.\n"
+                                   "\"Verbose message\" will display details for every purging operation.\n"
+                                   "Use \"no messages\" if you don't want to print anything about purging."),
             required=True,
             default=u'friendly',
             vocabulary='rt.purge.vocabulary.verbosityChoiceVocabulary',

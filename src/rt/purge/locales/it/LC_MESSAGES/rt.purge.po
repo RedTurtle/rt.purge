@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-02-06 11:04+0000\n"
+"POT-Creation-Date: 2013-02-06 11:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Caching proxies"
 msgstr "Proxy di cache"
 
-#: ../browser/controlpanel.py:35
+#: ../browser/controlpanel.py:33
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -29,7 +29,7 @@ msgstr "Annulla"
 msgid "Chaching not enabled. Please see the site configuration"
 msgstr "Cache non abilitata. Prego controlla la configurazione del sito"
 
-#: ../browser/controlpanel.py:31
+#: ../browser/controlpanel.py:29
 msgid "Changes saved"
 msgstr "Modifiche memorizzate"
 
@@ -37,7 +37,7 @@ msgstr "Modifiche memorizzate"
 msgid "Domains"
 msgstr "Domini"
 
-#: ../browser/controlpanel.py:37
+#: ../browser/controlpanel.py:35
 msgid "Edit cancelled"
 msgstr "Modifiche annullate"
 
@@ -53,6 +53,13 @@ msgstr "Messaggi amichevoli"
 msgid "If disabled, no purging will take place"
 msgstr "Se disabilitato, nessuna invalidazione verrà eseguita"
 
+msgid "Invalidate (purge) documents cached in Varnish"
+msgstr "Invalida (purge) documenti nella cache di Varnish"
+
+#: ../interfaces.py:83
+msgid "Message verbosity level"
+msgstr "Livello di dettaglio messaggi"
+
 #: ../vocabularies.py:26
 msgid "No messages at all"
 msgstr "Nessun messaggio"
@@ -65,22 +72,18 @@ msgstr "Fornisci gli URL per ogni proxy ai quali le richieste di PURGE devono es
 msgid "Purge page"
 msgstr "Invalida pagina"
 
-#: ../browser/controlpanel.py:20
+#: ../browser/controlpanel.py:18
 #: ../profiles/default/controlpanel.xml
 msgid "Purge settings"
-msgstr "Impostazioni invalidazione"
+msgstr "Impostazioni invalidazione cache"
 
-#: ../browser/controlpanel.py:24
+#: ../browser/controlpanel.py:22
 msgid "Save"
 msgstr "Salva"
 
 #: ../interfaces.py:41
 msgid "Send PURGE requests with virtual hosting paths"
 msgstr "Invia richieste di PURGE con virtual hosting paths"
-
-#: ../interfaces.py:83
-msgid "Show only friendly messages"
-msgstr "Mostra solo messaggi amichevoli"
 
 #: ../vocabularies.py:25
 msgid "Verbose messages"
@@ -91,15 +94,19 @@ msgstr "Messaggi dettagliati"
 msgid "help_domains"
 msgstr "Questa optione è rilevante solo se stai usando hosting e hai abilitato l'opzione di invare richieste di PURGE con i virtual hosting sopra. Se il tuo sito è servito su domini multipli, ad esempio http://example.org e http://www.example.org, potresti volere invalidare entrambi. Se così, inserisci tutti i domini qui."
 
-#. Default: "Instead of showing a lot of messages for every purged or not purged URL, shows only a single message. OK is a single purge has been done, Error/Warning if no purge has been done."
-#: ../interfaces.py:84
-msgid "help_friendly_messages"
-msgstr "Invece di mostrare una serie di messaggi por ogni URL invalidato o meno, mostra solo un messaggio. OK se almeno una invalidazione ha avuto atto, Errore/Avvertimento se nessuna invalidazione è avvenuta."
-
 #. Default: "Manage general site configuration for rt.purge"
-#: ../browser/controlpanel.py:21
+#: ../browser/controlpanel.py:19
 msgid "help_rtpurge_settings_editform"
 msgstr "Gestione della configurazione del sito di rt.purge"
+
+#. Default: "Choose your favorite verbosity level when performing manual purging.\n\"Friendly message\" (the default) will display a positive message when at least one cache backend page has been purger.\n\"Verbose message\" will display details for every purging operation.\nUse \"no messages\" if you don't want to print anything about purging."
+#: ../interfaces.py:84
+msgid "help_verbosity"
+msgstr ""
+"Scegli il tuo livello di dettaglio dei messaggi.\n"
+"Con \"messaggi amichevoli\" (predefinito) verrà visualizato un messaggio positivo se almeno una pagina in cache verrà invalidata.\n"
+"Con \"messaggi dettagliati\" saranno visualizzati i dettagli per ogni operazione di invalidazione.\n"
+"Usa \"nessun messaggio\" se non vuoi stampare nulla relativamente alle operazioni di invalidazione."
 
 #. Default: "This option is only relevant if you are using virtual hosting with Zope's VirtualHostMonster. This relies on special tokens (VirtualHostBase and VirtualHostRoot) in the URL to instruct Zope about the types of URLs that the user sees. If virtual host URLs are in use and this option is set, PURGE requests will be sent to the caching proxy with the virtual hosting tokens in place. This makes sense if there is a web server in front of your caching proxy performing the rewrites necessary to translate a user-facing URL into a virtual hosting URL, so that the requests the caching proxy sees have the rewrite information in them. Conversely, if the rewrite is done in or behind the caching proxy, you want to disable this option, so that the PURGE requests use URLs that match those seen by the caching proxy as they come from the client."
 #: ../interfaces.py:42

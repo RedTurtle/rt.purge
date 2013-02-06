@@ -10,7 +10,7 @@
         name="default"
         title="rt.purge"
         directory="profiles/default"
-        description="Installs rt.purge"
+        description="Invalidate (purge) documents cached in Varnish"
         provides="Products.GenericSetup.interfaces.EXTENSION" />
 
     <genericsetup:registerProfile
