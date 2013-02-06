@@ -13,9 +13,6 @@
             field="domains"
             delete="True"/>
     <record interface="rt.purge.interfaces.ICachePurgingSettings"
-            field="review_state"
-            delete="True"/>
-    <record interface="rt.purge.interfaces.ICachePurgingSettings"
-            field="friendly_messages"
+            field="verbosity"
             delete="True"/>
 </registry>

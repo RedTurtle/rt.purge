@@ -19,12 +19,15 @@ After intallation, you need to go to the Plone Control Panel and modify the conf
 Enable the purgin putting to "True" the "*Enable purging*" option, then be sure of what you must fill
 in the "*Caching proxies*" or "*Domains*" sections.
 
-Caching proxies is the most important option. Fill it with the URL to the Varnish instance, with the port.
+Caching proxies is the most important option: fill it with the URL to the Varnish instance, with the port.
 Example::
 
     http://localhost:8888
 
 Varnish must be configured to take connections from Zope instance.
+
+Note also that if you are using the "*Send PURGE requests with virtual hosting paths*" option, you must send
+purge commands from an URL that is using a virtual hosting itself.
 
 Automatically purge contents
 ----------------------------
@@ -46,11 +49,9 @@ Dependencies
 
 This product is targeted on Plone 3 and Varnish 2.0.x family.
 
-__ plone.app.caching
-
 Also, it need `plone.app.registry`__ (automatically downloaded).
 
-__ http://pypi.python.org/pypi/plone.app.registry
+__ http://pypi.python.org/pypi/plone.app.caching
 
 This dependency will download for you:
 
@@ -106,6 +107,8 @@ Plone 4?
 Plone 4 can use `plone.app.caching`__ so you don't need this product. In facts rt.purge is a simple
 port of plone.app.caching to Plone 3.
 
+__ http://pypi.python.org/pypi/plone.app.caching
+
 Troubleshooting
 ===============
 
@@ -154,7 +157,7 @@ Troubleshooting
     Maybe that the page isn't simply in the cache, so there is not problem.
     
     If you are sure that this page is cached, try to download the same without using a Web browser
-    (for example, use *curl* or *wget*).
+    (for example, use `curl`__ or `wget`__).
 
     __ http://en.wikipedia.org/wiki/CURL
     __ http://www.gnu.org/software/wget/ 

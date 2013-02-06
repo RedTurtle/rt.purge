@@ -11,7 +11,6 @@ class IPurgerLayer(Interface):
 class IPurgePaths(Interface):
     """ """
 
-
 class ICachePurgingSettings(Interface):
     """Settings used by the purging algorithm.
     
@@ -80,25 +79,15 @@ class ICachePurgingSettings(Interface):
             value_type=schema.URI(),
         )
 
-    review_state = schema.Tuple(
-            title=_(u"Review states to purge"),
-            description=_(u"Automatically purge a page when modified, if in "
-                          u"ones of those review states"),
-            required=False,
-            default=(),
-            missing_value=(),
-            #value_type=schema.Choice(vocabulary='plone.app.vocabularies.WorkflowStates'),
-            value_type=schema.TextLine(),
-        )
-
-    friendly_messages = schema.Bool(
+    verbosity = schema.Choice(
             title=_(u"Show only friendly messages"),
             description=_('help_friendly_messages',
                           default=u"Instead of showing a lot of messages for every purged or not "
                                    "purged URL, shows only a single message. OK is a single purge has "
                                    "been done, Error/Warning if no purge has been done."),
-            required=False,
-            default=False,
+            required=True,
+            default=u'friendly',
+            vocabulary='rt.purge.vocabulary.verbosityChoiceVocabulary',
         )
 
 

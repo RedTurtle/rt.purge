@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<registry>
+    <record interface="rt.purge.interfaces.ICachePurgingSettings"
+            field="review_state"
+            delete="True" />
+    <record interface="rt.purge.interfaces.ICachePurgingSettings"
+            field="friendly_messages"
+            delete="True" />
+</registry>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<object name="portal_controlpanel"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="rt.purge">
+
+    <configlet
+        title="Purge settings"
+        action_id="rtpurge-settings"
+        appId="rt.purge"
+        category="Products"
+        condition_expr=""
+        icon_expr="string:${portal_url}/++resource++refresh-page.png"
+        url_expr="string:${portal_url}/@@rtpurge-settings"
+        visible="True"
+        i18n:attributes="title">
+            <permission>rt.purge: Manage purge settings</permission>
+    </configlet>
+
+</object>

@@ -15,13 +15,11 @@ import sys
 import socket
 import httplib
 import urlparse
-import logging
 import threading
 
 from zope.interface import implements
 from rt.purge.interfaces import IPurger
-
-logger = logging.getLogger('rt.purging')
+from rt.purge import logger
 
 class Connection(httplib.HTTPConnection):
     """A connection that can handle either HTTP or HTTPS
@@ -119,8 +117,8 @@ class DefaultPurger(object):
         """
         
         (scheme, host, path, params, query, fragment) = urlparse.urlparse(url)
-        __traceback_info__ = (url, httpVerb, scheme, host,
-                              path, params, query, fragment)
+        #__traceback_info__ = (url, httpVerb, scheme, host,
+        #                      path, params, query, fragment)
         
         if self.http_1_1:
             conn._http_vsn = 11
