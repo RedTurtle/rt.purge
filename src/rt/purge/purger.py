@@ -2,7 +2,7 @@
 is ZPL licensed.
 
 Asynchronous purging works as follows:
-  
+
 * Each remote host gets a queue and a worker thread.
 
 * Each worker thread manages its own connection.  The queue is not processed
@@ -21,6 +21,7 @@ from zope.interface import implements
 from rt.purge.interfaces import IPurger
 from rt.purge import logger
 
+
 class Connection(httplib.HTTPConnection):
     """A connection that can handle either HTTP or HTTPS
     """
@@ -32,7 +33,7 @@ class Connection(httplib.HTTPConnection):
         elif scheme == "https":
             self.default_port = httplib.HTTPS_PORT
         else:
-            raise ValueError, "Invalid scheme '%s'" % (scheme,)
+            raise ValueError("Invalid scheme '%s'" % scheme)
         httplib.HTTPConnection.__init__(self, host, port, strict)
         self.timeout = timeout
 
@@ -47,16 +48,17 @@ class Connection(httplib.HTTPConnection):
             ssl = socket.ssl(sock, key_file, cert_file)
             self.sock = httplib.FakeSocket(sock, ssl)
         else:
-            raise ValueError, "Invalid scheme '%s'" % (self.scheme,)
+            raise ValueError("Invalid scheme '%s'" % self.scheme)
         # Once we have connected, set the timeout.
         self.sock.settimeout(self.timeout)
+
 
 class DefaultPurger(object):
     """Default purging implementation
     """
-    
+
     implements(IPurger)
-    
+
     def __init__(self, factory=Connection, timeout=30, backlog=200, errorHeaders=('x-squid-error',), http_1_1=True):
         self.factory = factory
         self.timeout = timeout
@@ -66,9 +68,9 @@ class DefaultPurger(object):
         self.queueLock = threading.Lock()
         self.errorHeaders = errorHeaders
         self.http_1_1 = http_1_1
-    
+
     # Public API
-    
+
     def purgeSync(self, url, httpVerb='PURGE'):
         try:
             conn = self.getConnection(url)
@@ -91,15 +93,15 @@ class DefaultPurger(object):
             logger.debug('Error while purging %s:\n%s' % (url, xerror))
         logger.debug("Completed synchronous purge of %s", url)
         return status, xcache, xerror
-    
+
     # Internal API between Purger and worker threads
-    
+
     def getConnection(self, url):
         """Creates a new connection - returns a connection object that is
         already connected. Exceptions raised by that connection are not
         trapped.
         """
-        
+
         (scheme, host, path, params, query, fragment) = urlparse.urlparse(url)
         # 
         # process.
@@ -115,11 +117,11 @@ class DefaultPurger(object):
         and ``xerror`` is the contents of the first header found of the
         header list in ``self.errorHeaders``.
         """
-        
+
         (scheme, host, path, params, query, fragment) = urlparse.urlparse(url)
         #__traceback_info__ = (url, httpVerb, scheme, host,
         #                      path, params, query, fragment)
-        
+
         if self.http_1_1:
             conn._http_vsn = 11
             conn._http_vsn_str = 'HTTP/1.1'
@@ -130,8 +132,8 @@ class DefaultPurger(object):
             # we use the full url as the purge path, to allow for virtual
             # hosting in squid
             path = url
-       
-        purge_path = urlparse.urlunparse(('','', path, params, query, fragment))
+
+        purge_path = urlparse.urlunparse(('', '', path, params, query, fragment))
         logger.debug('making %s request to %s for %s.' % (httpVerb,
                                                           host, purge_path))
         conn.putrequest(httpVerb, purge_path, skip_accept_encoding=True)

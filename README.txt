@@ -29,15 +29,6 @@ Varnish must be configured to take connections from Zope instance.
 Note also that if you are using the "*Send PURGE requests with virtual hosting paths*" option, you must send
 purge commands from an URL that is using a virtual hosting itself.
 
-Automatically purge contents
-----------------------------
-
-Filling the ``review_state`` data with a set of states of you workflow(s) make possible for your users
-to enable automatic purging. When a content in on of that state is updated, the purging will start
-automatically.
-
-This can be useful for users that have the power to edit (as example) published contents.
-
 Archetypes purge
 ----------------
 

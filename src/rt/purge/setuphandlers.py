@@ -4,6 +4,7 @@ from Products.CMFCore.utils import getToolByName
 
 from rt.purge import logger
 
+
 def migrateTo1000(context):
     setup_tool = getToolByName(context, 'portal_setup')
     logger.info("Cleaning old configuration")

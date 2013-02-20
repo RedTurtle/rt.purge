@@ -10,6 +10,7 @@ from plone.app.registry.browser import controlpanel
 from rt.purge import purgerMessageFactory as _
 from rt.purge.interfaces import ICachePurgingSettings
 
+
 class RTPurgeSettingsControlPanelEditForm(controlpanel.RegistryEditForm):
     """rt.purge settings form.
     """

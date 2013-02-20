@@ -4,8 +4,8 @@ Changelog
 1.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Removed deprecated documentation of review_state purging [keul]
+- Cleanep mixed tab/spaces [keul]
 
 1.5.0 (2013-02-06)
 ------------------
