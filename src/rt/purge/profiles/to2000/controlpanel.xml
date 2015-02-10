@@ -7,12 +7,7 @@
         title="Purge settings"
         action_id="rtpurge-settings"
         appId="rt.purge"
-        category="Products"
-        condition_expr=""
-        icon_expr="string:${portal_url}/++resource++refresh-page.png"
-        url_expr="string:${portal_url}/@@rtpurge-settings"
-        visible="True"
-        i18n:attributes="title">
+        remove="True">
             <permission>rt.purge: Manage purge settings</permission>
     </configlet>
 

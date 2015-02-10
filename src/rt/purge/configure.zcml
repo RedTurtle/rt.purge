@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:zcml="http://namespaces.zope.org/zcml"
@@ -10,6 +11,14 @@
     <include package="collective.purgebyid" />
 
     <include file="profiles.zcml" />
+
+    <browser:page
+        for="*"
+        name="rt.purge"
+        class=".browser.PurgeImmediately"
+        permission="plone.cachepurging.InitiatePurge"
+        layer=".interfaces.IPurgerLayer"
+        />
 
     <utility
       name="rt.purge.vocabulary.verbosityChoiceVocabulary"

@@ -16,5 +16,7 @@ def migrateTo1000(context):
 
 def migrateTo2000(context):
     setup_tool = getToolByName(context, 'portal_setup')
-    setup_tool.runAllImportStepsFromProfile('profile-rt.purge:to2000',)
+    setup_tool.runAllImportStepsFromProfile('profile-rt.purge:to2000')
+    setup_tool.runImportStepFromProfile('profile-rt.purge:default', 'controlpanel')
+    setup_tool.runImportStepFromProfile('profile-rt.purge:default', 'actions')
     logger.info('Migrated to version 2.0')
