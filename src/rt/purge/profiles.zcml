@@ -21,6 +21,13 @@
         provides="Products.GenericSetup.interfaces.EXTENSION" />
 
     <genericsetup:registerProfile
+        name="to2000"
+        title="rt.purge: migrate to 2.0"
+        directory="profiles/to2000"
+        description="Migration of rt.purge to version 2.0"
+        provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+    <genericsetup:registerProfile
         name="to1000"
         title="rt.purge: migrate to 1.5"
         directory="profiles/to1000"
@@ -34,6 +41,16 @@
         destination="1000"
         handler=".setuphandlers.migrateTo1000"
         sortkey="1"
+        profile="rt.purge:default"
+     />
+
+    <genericsetup:upgradeStep
+        title="Upgrade to rt.purge 2.0"
+        description="Migrates rt.purge to 2000"
+        source="1000"
+        destination="2000"
+        handler=".setuphandlers.migrateTo2000"
+        sortkey="2"
         profile="rt.purge:default"
      />
 

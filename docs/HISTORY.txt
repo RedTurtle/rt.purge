@@ -1,75 +1,12 @@
 Changelog
 =========
 
-1.5.1 (unreleased)
+2.0.0 (unreleased)
 ------------------
 
-- Removed deprecated documentation of review_state purging [keul]
-- Cleanep mixed tab/spaces [keul]
+No more a complete purge add-on, but based on collective.purgebyid
 
-1.5.0 (2013-02-06)
-------------------
+1.x
+---
 
-* Proper uninstall procedure [keul]
-* Added licences files [keul]
-* Removed the review state autopurge feature
-  (if needed, can be done in another package) [keul]
-* ``friendly_messages`` has been transformed to a more flexible ``verbosity``
-  option [keul]
-* added a configuration panel [keul]
-
-1.4.0 (2012-08-01)
-------------------
-
-* Try to support also Plone 4 [keul]
-
-1.3.0 (2012-03-28)
-------------------
-
-* the ``rt.purge`` view now support a keyword argument: ``verbose`` (default True).
-  When False, do not display any portal message status [keul]
-
-1.2.0 (2011-06-14)
-------------------
-
-* invalidate a path only one time for request, even if multiple
-  adapter return the path more than a time [keul]
-* added a flag (``friendly_messages``) for reduce and make more user
-  friendly the purge/error messages [keul]
-
-1.1.2 (2011-06-10)
-------------------
-
-* do not break if the current content don't use workflows [keul]
-* fixed a bug that, when invalidate a file content from menu,
-  was also downloading the file [keul]
-* error type for a 404 code is "warning" [keul] 
-
-1.1.1 (2011-05-26)
-------------------
-
-* Fixed a bug that break Plone if rt.purge is there but not
-  installed [keul]
-
-1.1.0 (2011-05-23)
-------------------
-
-* Documentation fixes [keul]
-* Added a ``review_state`` field [keul]
-* Fixed permission of the "Purge" action menu to the
-  proper ones [keul]
-* Fixed bug that make possible to all to purge pages [keul]
-* added translations [keul]
-
-1.0.1 (2011-01-27)
-------------------
-
-* z3c.autoinclude support [keul]
-* "Error purging" will also display the error code [keul]
-* More documentation [keul]
-
-1.0 - 2010-02-15
-----------------
-
-* Initial release [amleczko]
-
+For old 1.x history see https://github.com/RedTurtle/rt.purge/tree/1.x

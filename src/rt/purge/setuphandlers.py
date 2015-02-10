@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from Products.CMFCore.utils import getToolByName
-
 from rt.purge import logger
 
 
@@ -14,3 +13,8 @@ def migrateTo1000(context):
     setup_tool.runImportStepFromProfile('profile-rt.purge:default', 'actions')
     setup_tool.runImportStepFromProfile('profile-rt.purge:default', 'controlpanel')
     logger.info('Migrated to version 1.5')
+
+def migrateTo2000(context):
+    setup_tool = getToolByName(context, 'portal_setup')
+    setup_tool.runAllImportStepsFromProfile('profile-rt.purge:to2000',)
+    logger.info('Migrated to version 2.0')

@@ -1,47 +1,19 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
-	xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="rt.purge">
 
     <five:registerPackage package="." />    
     <i18n:registerTranslations directory="locales" />
-    <include package="zope.annotation" />
-    <include package="plone.app.registry" />
-    
-    <!-- Default rewriter and purge urls -->
-    <adapter factory=".rewrite.DefaultRewriter" />
-    <!-- Purge queue -->
-    <utility factory=".purger.DefaultPurger" />
-    <adapter factory=".paths.TraversablePurgePaths" name="default" />
-
-    <!-- Make sure we can annotate the request -->
-    <class class="ZPublisher.BaseRequest.BaseRequest">
-        <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />
-    </class>
-    
-    <!-- Views to explicitly purge the context -->
-    <permission
-	    zcml:condition="not-installed plone.cachepurging"
-        id="plone.cachepurging.InitiatePurge"
-        title="plone.cachepurging: Manually purge objects"
-        />
-	<include package="plone.cachepurging"
-             zcml:condition="installed plone.cachepurging" />
-
-    <permission
-        id="rt.purge.ManageSettings"
-        title="rt.purge: Manage purge settings"
-        />
-
-    <include package=".browser" />
-
-    <utility
-        name="rt.purge.vocabulary.verbosityChoiceVocabulary"
-        component=".vocabularies.verbosityChoiceVocabularyFactory"
-    />
+    <include package="collective.purgebyid" />
 
     <include file="profiles.zcml" />
+
+    <utility
+      name="rt.purge.vocabulary.verbosityChoiceVocabulary"
+      component=".vocabularies.verbosityChoiceVocabularyFactory"
+      />
 
 </configure>
