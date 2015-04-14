@@ -17,5 +17,5 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: rt.purge\n"
 
-msgid "Invalidate (purge) documents cached in Varnish"
+msgid "Manually purge documents from cache"
 msgstr ""

@@ -2,7 +2,6 @@
 
 from zope.interface import Interface
 from zope import schema
-
 from rt.purge import purgerMessageFactory as _
 
 
@@ -15,9 +14,7 @@ class IPurgePaths(Interface):
 
 
 class ICachePurgingSettings(Interface):
-    """Settings used by the purging algorithm.
-    Should be installed into ``plone.registry``.
-    """
+    # DEPRECATED - keep only to be able to switch to version 2.0
 
     enabled = schema.Bool(
             title=u"Enable purging",

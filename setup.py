@@ -5,10 +5,9 @@ version = '2.0.0.dev0'
 
 setup(name='rt.purge',
       version=version,
-      description="Product for Plone for invalidate (purge) documents "
-                  "cached in Varnish",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      description="Frontend tool for collective.purgebyid (manually purge Plone documents from cache)",
+      long_description=open("README.rst").read() + "\n" +
+                       open(os.path.join("docs", "HISTORY.rst")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
@@ -31,6 +30,7 @@ setup(name='rt.purge',
       install_requires=[
           'setuptools',
           'collective.purgebyid',
+          'z3c.caching',
       ],
       entry_points="""
       # -*- Entry points: -*-

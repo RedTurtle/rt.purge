@@ -9,11 +9,12 @@
     <five:registerPackage package="." />    
     <i18n:registerTranslations directory="locales" />
     <include package="collective.purgebyid" />
+	<include package="z3c.caching" />
 
     <include file="profiles.zcml" />
 
     <browser:page
-        for="*"
+        for="plone.uuid.interfaces.IUUIDAware"
         name="rt.purge"
         class=".browser.PurgeImmediately"
         permission="plone.cachepurging.InitiatePurge"

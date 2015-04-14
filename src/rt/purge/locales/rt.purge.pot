@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-02-10 17:15+0000\n"
+"POT-Creation-Date: 2015-04-14 13:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,11 @@ msgstr ""
 msgid "Friendly messages"
 msgstr ""
 
-msgid "Invalidate (purge) documents cached in Varnish"
+#: ../browser.py:14
+msgid "Item purged"
+msgstr ""
+
+msgid "Manually purge documents from cache"
 msgstr ""
 
 #: ../vocabularies.py:27
@@ -30,10 +34,6 @@ msgstr ""
 
 #: ../profiles/default/actions.xml
 msgid "Purge page"
-msgstr ""
-
-#: ../profiles/default/controlpanel.xml
-msgid "Purge settings"
 msgstr ""
 
 #: ../vocabularies.py:26

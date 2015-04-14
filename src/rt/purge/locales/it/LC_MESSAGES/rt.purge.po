@@ -4,9 +4,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-02-10 17:15+0000\n"
+"POT-Creation-Date: 2015-04-14 13:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -16,13 +16,18 @@ msgstr ""
 "Language-Name: Italian\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: rt.purge\n"
+"X-Is-Fallback-For: it-ch it-it\n"
 
 #: ../vocabularies.py:25
 msgid "Friendly messages"
 msgstr "Messaggi amichevoli"
 
-msgid "Invalidate (purge) documents cached in Varnish"
-msgstr "Invalida (purge) documenti nella cache di Varnish"
+#: ../browser.py:14
+msgid "Item purged"
+msgstr "Elemento invalidato"
+
+msgid "Manually purge documents from cache"
+msgstr "Invalida manualmente documenti nella cache"
 
 #: ../vocabularies.py:27
 msgid "No messages at all"
@@ -31,10 +36,6 @@ msgstr "Nessun messaggio"
 #: ../profiles/default/actions.xml
 msgid "Purge page"
 msgstr "Invalida pagina"
-
-#: ../profiles/default/controlpanel.xml
-msgid "Purge settings"
-msgstr "Impostazioni invalidazione cache"
 
 #: ../vocabularies.py:26
 msgid "Verbose messages"
