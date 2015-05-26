@@ -2,6 +2,9 @@ include *.rst
 
 recursive-include docs *
 recursive-include src *
+include buildout.cfg
+recursive-include buildout *.cfg
+recursive-include buildout *.py
 
 global-exclude *.pyc
 global-include *.mo
