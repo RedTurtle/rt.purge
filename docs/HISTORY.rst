@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.0 (unreleased)
+2.0.0 (2015-05-26)
 ------------------
 
 No more a complete purge add-on, but based on collective.purgebyid
