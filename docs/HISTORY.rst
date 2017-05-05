@@ -4,7 +4,8 @@ Changelog
 2.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- fix dependencies
+  [mamico]
 
 
 2.0.0 (2015-05-26)

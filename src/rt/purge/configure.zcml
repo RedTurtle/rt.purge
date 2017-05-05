@@ -8,8 +8,8 @@
 
     <five:registerPackage package="." />    
     <i18n:registerTranslations directory="locales" />
-    <include package="collective.purgebyid" />
-	<include package="z3c.caching" />
+
+    <includeDependencies package="." />
 
     <include file="profiles.zcml" />
 
@@ -25,5 +25,31 @@
       name="rt.purge.vocabulary.verbosityChoiceVocabulary"
       component=".vocabularies.verbosityChoiceVocabularyFactory"
       />
+
+<!--     
+    <configure zcml:condition="installed Products.Ploneboard">
+        <subscriber
+                  for="Products.Ploneboard.interfaces.IConversation
+                   zope.app.container.interfaces.IObjectAddedEvent"
+              handler=".event.purgeContent"
+            />
+        <subscriber
+                  for="Products.Ploneboard.interfaces.IComment
+                   zope.app.container.interfaces.IObjectAddedEvent"
+              handler=".event.purgeContent"
+            />
+
+        <subscriber
+                  for="Products.Ploneboard.interfaces.IConversation
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".event.purgeContent"
+            />
+        <subscriber
+                  for="Products.Ploneboard.interfaces.IComment
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".event.purgeContent"
+            />
+   </configure>
+-->
 
 </configure>

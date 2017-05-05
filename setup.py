@@ -3,6 +3,8 @@ import os
 
 version = '2.0.1.dev0'
 
+tests_require = ['plone.app.testing']
+
 setup(name='rt.purge',
       version=version,
       description="Frontend tool for collective.purgebyid (manually purge Plone documents from cache)",
@@ -27,9 +29,13 @@ setup(name='rt.purge',
       namespace_packages=['rt'],
       include_package_data=True,
       zip_safe=False,
+      extras_require=dict(
+          test=tests_require,
+      ),
       install_requires=[
           'setuptools',
           'collective.purgebyid',
+          'plone.cachepurging',
           'z3c.caching',
       ],
       entry_points="""
