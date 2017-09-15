@@ -3,6 +3,7 @@ include *.rst
 recursive-include docs *
 recursive-include src *
 include buildout.cfg
+include buildout-3.cfg
 recursive-include buildout *.cfg
 recursive-include buildout *.py
 
