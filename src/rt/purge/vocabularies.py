@@ -16,16 +16,17 @@ except ImportError:
 
 
 class VerbosityChoiceVocabulary(object):
-    """Vocabulary factory for choosing verbosirt of the purge action
-    """
+    """Vocabulary factory for choosing verbosirt of the purge action"""
+
     implements(IVocabularyFactory)
 
     def __call__(self, context):
-
-        terms = [SimpleTerm(u'friendly', title=_(u'Friendly messages')),
-                 SimpleTerm(u'verbose', title=_(u'Verbose messages')),
-                 SimpleTerm(u'quiet', title=_(u'No messages at all')),
-                 ]
+        terms = [
+            SimpleTerm("friendly", title=_("Friendly messages")),
+            SimpleTerm("verbose", title=_("Verbose messages")),
+            SimpleTerm("quiet", title=_("No messages at all")),
+        ]
         return SimpleVocabulary(terms)
+
 
 verbosityChoiceVocabularyFactory = VerbosityChoiceVocabulary()
