@@ -2,7 +2,8 @@
 
 from zope.interface import Interface
 from zope import schema
-from rt.purge import purgerMessageFactory as _
+
+# from rt.purge import purgerMessageFactory as _
 
 
 class IPurgerLayer(Interface):

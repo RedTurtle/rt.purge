@@ -2,7 +2,6 @@
 
 # DEPRECATED - keep only to be able to switch to version 2.0
 
-from Products.CMFCore.utils import getToolByName
 from rt.purge import purgerMessageFactory as _
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
