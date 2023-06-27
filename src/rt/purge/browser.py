@@ -8,10 +8,8 @@ from zope.event import notify
 
 
 class PurgeImmediately(BrowserView):
-    
     def __call__(self, *args, **kwargs):
         notify(Purge(self.context))
         messages = IStatusMessage(self.request)
-        messages.add(_(u"Item purged"), type=u"info")
-        self.request.response.redirect(self.context.absolute_url() + '/view')
-        
+        messages.add(_("Item purged"), type="info")
+        self.request.response.redirect(self.context.absolute_url() + "/view")

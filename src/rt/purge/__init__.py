@@ -4,5 +4,5 @@ import logging
 
 from zope.i18nmessageid import MessageFactory
 
-purgerMessageFactory = MessageFactory('rt.purge')
-logger = logging.getLogger('rt.purge')
+purgerMessageFactory = MessageFactory("rt.purge")
+logger = logging.getLogger("rt.purge")
