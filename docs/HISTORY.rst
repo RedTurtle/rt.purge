@@ -4,7 +4,8 @@ Changelog
 2.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Python3 and Plone52 compatibility.
+  [Francesco Merlo]
 
 
 2.0.1 (2017-09-15)
